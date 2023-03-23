@@ -199,6 +199,10 @@ body {
     background: var(--strongCyan);
 }
 
+.btn-enabled:hover{
+    background: var(--lightGrayishCyan);
+}
+
 @media(min-width: 768px) {
     .logo {
         text-align: center;

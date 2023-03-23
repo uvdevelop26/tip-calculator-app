@@ -8,19 +8,16 @@ const inputData = calcArea.querySelectorAll('.input-tip');
 const btnTips = btnArea.querySelectorAll('button');
 const result = resutArea.querySelectorAll('.result');
 const customTip = calcArea.querySelector('.custom-input')
-
-//cleaning the inputs when load
-window.addEventListener('load', ()=>{
-    inputData[0].value = '';
-    inputData[1].value = '';
-    customTip.value = '';
-});
-
-//adding event listener to the elements that contains the values
-inputData[0].addEventListener('input', validateBill);
+const btnReset = resutArea.querySelector('.btn-reset');
 
 
-btnTips.forEach((item) => {
+
+//===============================Event Listener Areas===========================
+window.addEventListener('load', cleanEverything); //reset after load 
+
+inputData[0].addEventListener('input', validateBill); //validate first input
+
+btnTips.forEach((item) => { //adding class to the selected tip (button)
     item.addEventListener('click', (e) => {
         let selected = e.target;
         selected.classList.toggle('light-cyan-button')
@@ -33,37 +30,69 @@ btnTips.forEach((item) => {
     });
 });
 
-inputData[1].addEventListener('input', performOperations)
+inputData[1].addEventListener('input', performOperations) //second input perform all the operations
 
+btnReset.addEventListener('click', () => { //reset button config
+    cleanEverything()
 
-function validateBill() {
-    let bill = inputData[0].value;
-    const inputError = calcArea.querySelectorAll('.text-error')[0];
-
-    if (bill === '0') {
-        inputData[0].blur();
-        inputData[0].classList.add('error')
-        inputError.innerHTML = "can't be zero"
-    } else if (bill === '') {
-        inputData[0].blur();
-        inputData[0].classList.add('error')
-        inputError.innerHTML = "can't be empty"
-    } else {
-
-        inputError.innerHTML = ""
+    if (btnReset.classList.contains('btn-enabled')) {
+        btnReset.classList.remove('btn-enabled');
+        btnReset.disabled = true;
     }
+});
+
+
+//========================functions area======================================
+
+function cleanEverything() { //function reset the calculator
+    inputData[0].value = '';
+    inputData[1].value = '';
+    customTip.value = '';
+    result[0].innerHTML = '$0.00';
+    result[1].innerHTML = '$0.00';
+
+    btnTips.forEach(elem => {
+        elem.value = '';
+    })
+}
+
+function handeInputErrors(input, inputError) { //validate input errors
+    let data = parseInt(input.value);
+
+    if (data === 0) {
+        input.blur();
+        input.classList.add('error');
+        inputError.innerHTML = "can't be zero"
+    } else if (isNaN(data)) {
+        input.blur();
+        input.classList.add('error');
+        inputError.innerHTML = "is not a number"
+    } else if (!isNaN(data)) {
+        inputError.innerHTML = ""
+
+    }
+}
+
+
+function validateBill() { //validate first input
+
+    const inputError = calcArea.querySelectorAll('.text-error')[0]
+
+    handeInputErrors(inputData[0], inputError)
 }
 
 //performing final operations using the input event of the second input
 function performOperations() {
 
-    const inputError = calcArea.querySelectorAll('.text-error')[1];
-    //both input data values
+    //validate second input 
+    const inputError = calcArea.querySelectorAll('.text-error')[1]
+
+    handeInputErrors(inputData[1], inputError)
+
+    //get all the values to perform the operations
     let bill = parseInt(inputData[0].value);
     let people = parseInt(inputData[1].value);
 
-
-    //get the value of the button or the custom element
     const getTipValue = () => {
         let tip = btnArea.querySelector('.light-cyan-button')
         const customTipValue = customTip.value;
@@ -80,24 +109,21 @@ function performOperations() {
         }
     }
 
+    let tipValue = getTipValue()
 
-    if (people === '0') {
-        inputData[1].blur();
-        inputData[1].classList.add('error')
-        inputError.innerHTML = "can't be zero"
-    } else if (people === '') {
-        inputData[1].blur();
-        inputData[1].classList.add('error')
-        inputError.innerHTML = "can't be empty"
-    } else {
-
-        let tipValue = getTipValue();
-
-        let correctTip = (bill * tipValue) / 100;
-        let totalPeople = people * correctTip;
-
+    if (!isNaN(tipValue)) {
+        btnReset.disabled = false;
+        btnReset.classList.add('btn-enabled')
+        let correctTip = (bill * tipValue) / 100
+        let totalPeople = correctTip / people;
         result[0].innerHTML = '$' + correctTip;
-        result[1].innerHTML = '$' + totalPeople
+        result[1].innerHTML = '$' + totalPeople.toFixed(2)
+    }else if(isNaN(tipValue)){
+        result[0].innerHTML = tipValue;
+        result[1].innerHTML = tipValue   
     }
-}
 
+   
+
+
+}
