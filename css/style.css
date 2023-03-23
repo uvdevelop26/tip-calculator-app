@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+    --strongCyan: hsl(172, 67%, 45%);
+    --veryDarkCyan: hsl(183, 100%, 15%);
+    --darkGrayishCyan: hsl(186, 14%, 43%);
+    --grayishCyan: hsl(184, 14%, 56%);
+    --lightGrayishCyan: hsl(185, 41%, 84%);
+    --veryLightGrayishCyan: hsl(189, 41%, 97%);
+    --white: hsl(0, 0%, 100%);
+    --disabledColor: hsl(183, 79%, 24%);
+    --lightherCyan: hsl(172, 63%, 76%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Space Mono', monospace;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+body {
+    background: var(--lightGrayishCyan);
+    width: 100vw;
+    height: 100vh;
+}
+
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+.logo {
+    text-align: center;
+    padding: 40px 0px;
+}
+
+.calculator-container {
+    background-color: var(--white);
+    border-radius: 25px 25px 0px 00px;
+    padding: 1rem;
+}
+
+.input-area {
+    padding-bottom: 20px;
+    position: relative;
+}
+.input-area-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon {
+    position: absolute;
+    left: 18px;
+}
+
+.text-cyan {
+    font-size: 16px;
+    color: var(--darkGrayishCyan);
+    margin-bottom: 8px;
+}
+
+.text-error{
+    font-size: 16px;
+    color: rgb(230, 73, 25);
+    
+}
+
+.display-block {
+    display: block;
+}
+
+.input-tip {
+    border: none;
+    padding: 5px 18px;
+    width: 100%;
+    background: var(--veryLightGrayishCyan);
+    border-radius: 5px;
+    text-align: right;
+    color: var(--veryDarkCyan);
+    cursor: pointer;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.error{
+    outline: 2px solid rgb(230, 73, 25);
+    
+}
+
+.input-tip:focus{
+    outline: 2px solid var(--strongCyan);
+}
+
+.btn-container {
+    padding-top: 12px;
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.btn-tips {
+    width: 48%;
+    max-width: 300px;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 0px;
+    text-align: center;
+}
+
+
+.cyan-button {
+    background: var(--veryDarkCyan);
+    color: var(--white);
+}
+
+.cyan-button:hover{
+    color: var(--veryDarkCyan);
+    background: var(--lightherCyan);
+}
+
+.light-cyan-button {
+    background: var(--strongCyan);
+    color: var(--veryDarkCyan);
+}
+
+.custom-input {
+    background: var(--veryLightGrayishCyan);
+    color: var(--veryDarkCyan);
+    text-align: right;
+    padding: 0px 18px;
+    cursor: pointer;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.custom-input:focus{
+    outline: 2px solid var(--strongCyan);
+}
+
+.people-area {
+    padding: 25px 0px 25px 0px;
+    position: relative;
+}
+
+
+
+.result-container {
+    background: var(--veryDarkCyan);
+    border-radius: 15px;
+    padding: 1.5rem 1rem 1rem 1rem;
+}
+
+.tip-amount-area {
+    padding: 8px 0px 25px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.amount-container {
+    width: fit-content;
+}
+
+.text-small-white {
+    font-size: 16px;
+    color: var(--white);
+    line-height: 5px;
+}
+
+.text-small-green {
+    font-size: 14px;
+    color: var(--grayishCyan);
+}
+
+.result {
+    font-size: 33px;
+    color: var(--strongCyan);
+}
+
+.btn-reset {
+    width: 100%;
+    padding: 5px 0px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-disabled {
+    background: var(--disabledColor);
+    color: var(--veryDarkCyan);
+}
+
+.btn-enabled {
+    color: var(--veryDarkCyan);
+    background: var(--strongCyan);
+}
+
+@media(min-width: 768px) {
+    .logo {
+        text-align: center;
+        padding: 100px 0px 40px 0px;
+    }
+
+    .calculator-container {
+        border-radius: 25px;
+        max-width: 900px;
+        margin: 0 auto;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        display: flex;
+        gap: 1.2rem;
+        justify-content: space-between;
+    }
+
+    .calculation-area {
+        width: 50%;
+        padding: .4rem;
+    }
+
+    .result-container {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .text-cyan {
+        padding-top: 10px;
+    }
+
+    .btn-tips {
+        width: 30%;
+    }
+
+    .result-container {
+        padding: 2.7rem 1rem 1rem 1rem;
+    }
+
+    .people-area {
+        padding: 25px 0px 0px 0px;
+        position: relative;
+    }
+
+    .result {
+        font-size: 35px;
+        color: var(--strongCyan);
+    }
+
+
+}
